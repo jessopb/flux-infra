@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: registry-web
+  namespace: registry
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`registry.dev1.zeppi.tech`)
+    services:
+    - name: registry
+      port: 5000
+  tls:
+    certResolver: default
